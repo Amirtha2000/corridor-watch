@@ -128,9 +128,21 @@ def cmd_run(cfg: Config, override_qa: bool = False) -> int:
 
     map_path = mapping.write_map(scored, lines.to_crs(cfg.crs_utm), out_dir / "corridor_risk_map.html")
 
+    from corridor_watch.outputs import briefing
+
+    img = cfg.raw.get("imagery", {})
+    briefing_path = briefing.write_briefing(
+        scored, out_dir, cfg.raw["aoi"]["name"],
+        img.get("baseline_date_range", ["", ""]), img.get("monitor_date_range", ["", ""]),
+        qa_json_path=json_path, map_html_path=map_path,
+    )
+
     top = scored.head(5)[["rank", "segment_id", "km_start", "km_end", "risk_class", "risk_score"]]
     log.info("Top risk spans:\n%s", top.to_string(index=False))
-    log.info("Delivery complete → %s | %s | %s", "corridor_risk.geojson", "corridor_risk.csv", map_path.name)
+    log.info(
+        "Delivery complete → %s | %s | %s | %s",
+        "corridor_risk.geojson", "corridor_risk.csv", map_path.name, briefing_path.name,
+    )
     return 0
 
 
