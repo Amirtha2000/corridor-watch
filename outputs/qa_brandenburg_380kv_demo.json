@@ -1,0 +1,252 @@
+{
+  "run": "brandenburg_380kv_demo",
+  "generated": "2026-08-18 10:53 UTC",
+  "verdict": "PASS",
+  "context": {
+    "config": "corridor_brandenburg.yaml",
+    "aoi": "brandenburg_380kv_demo",
+    "segments": 33,
+    "high_risk": 4
+  },
+  "checks": [
+    {
+      "check": "input power lines: at least 1 feature(s)",
+      "passed": true,
+      "severity": "error",
+      "message": "1 feature(s) present",
+      "details": {
+        "count": 1
+      }
+    },
+    {
+      "check": "input power lines: CRS matches expected",
+      "passed": true,
+      "severity": "error",
+      "message": "vector CRS EPSG:4326 vs expected EPSG:4326",
+      "details": {
+        "crs": "EPSG:4326"
+      }
+    },
+    {
+      "check": "input power lines: geometries valid and non-empty",
+      "passed": true,
+      "severity": "error",
+      "message": "0 invalid, 0 empty geometries",
+      "details": {
+        "invalid": 0,
+        "empty": 0
+      }
+    },
+    {
+      "check": "NDVI baseline: CRS matches AOI grid",
+      "passed": true,
+      "severity": "error",
+      "message": "raster CRS EPSG:32633 vs expected EPSG:32633",
+      "details": {
+        "crs": "EPSG:32633"
+      }
+    },
+    {
+      "check": "NDVI baseline: nodata fraction <= 10%",
+      "passed": true,
+      "severity": "error",
+      "message": "nodata fraction = 0.00%",
+      "details": {
+        "nodata_fraction": 0.0
+      }
+    },
+    {
+      "check": "NDVI baseline: values within (-1.0, 1.0)",
+      "passed": true,
+      "severity": "error",
+      "message": "observed range [0.181, 0.794]",
+      "details": {
+        "min": 0.1813,
+        "max": 0.7944
+      }
+    },
+    {
+      "check": "NDVI baseline: non-degenerate variance",
+      "passed": true,
+      "severity": "warning",
+      "message": "std = 0.19292 (a constant raster usually means a broken upstream read)",
+      "details": {
+        "std": 0.192922
+      }
+    },
+    {
+      "check": "NDVI baseline: grid summary",
+      "passed": true,
+      "severity": "info",
+      "message": "829x655 px @ 10.0 m",
+      "details": {
+        "width": 829,
+        "height": 655,
+        "res_m": 10.0
+      }
+    },
+    {
+      "check": "NDVI monitor: CRS matches AOI grid",
+      "passed": true,
+      "severity": "error",
+      "message": "raster CRS EPSG:32633 vs expected EPSG:32633",
+      "details": {
+        "crs": "EPSG:32633"
+      }
+    },
+    {
+      "check": "NDVI monitor: nodata fraction <= 10%",
+      "passed": true,
+      "severity": "error",
+      "message": "nodata fraction = 0.00%",
+      "details": {
+        "nodata_fraction": 0.0
+      }
+    },
+    {
+      "check": "NDVI monitor: values within (-1.0, 1.0)",
+      "passed": true,
+      "severity": "error",
+      "message": "observed range [0.166, 0.920]",
+      "details": {
+        "min": 0.1659,
+        "max": 0.92
+      }
+    },
+    {
+      "check": "NDVI monitor: non-degenerate variance",
+      "passed": true,
+      "severity": "warning",
+      "message": "std = 0.19356 (a constant raster usually means a broken upstream read)",
+      "details": {
+        "std": 0.193558
+      }
+    },
+    {
+      "check": "NDVI monitor: grid summary",
+      "passed": true,
+      "severity": "info",
+      "message": "829x655 px @ 10.0 m",
+      "details": {
+        "width": 829,
+        "height": 655,
+        "res_m": 10.0
+      }
+    },
+    {
+      "check": "dNDVI: CRS matches AOI grid",
+      "passed": true,
+      "severity": "error",
+      "message": "raster CRS EPSG:32633 vs expected EPSG:32633",
+      "details": {
+        "crs": "EPSG:32633"
+      }
+    },
+    {
+      "check": "dNDVI: nodata fraction <= 10%",
+      "passed": true,
+      "severity": "error",
+      "message": "nodata fraction = 0.00%",
+      "details": {
+        "nodata_fraction": 0.0
+      }
+    },
+    {
+      "check": "dNDVI: values within (-2.0, 2.0)",
+      "passed": true,
+      "severity": "error",
+      "message": "observed range [-0.070, 0.652]",
+      "details": {
+        "min": -0.0698,
+        "max": 0.6522
+      }
+    },
+    {
+      "check": "dNDVI: non-degenerate variance",
+      "passed": true,
+      "severity": "warning",
+      "message": "std = 0.02279 (a constant raster usually means a broken upstream read)",
+      "details": {
+        "std": 0.022786
+      }
+    },
+    {
+      "check": "dNDVI: grid summary",
+      "passed": true,
+      "severity": "info",
+      "message": "829x655 px @ 10.0 m",
+      "details": {
+        "width": 829,
+        "height": 655,
+        "res_m": 10.0
+      }
+    },
+    {
+      "check": "corridor segments: at least 5 feature(s)",
+      "passed": true,
+      "severity": "error",
+      "message": "33 feature(s) present",
+      "details": {
+        "count": 33
+      }
+    },
+    {
+      "check": "corridor segments: CRS matches expected",
+      "passed": true,
+      "severity": "error",
+      "message": "vector CRS EPSG:32633 vs expected EPSG:32633",
+      "details": {
+        "crs": "EPSG:32633"
+      }
+    },
+    {
+      "check": "corridor segments: geometries valid and non-empty",
+      "passed": true,
+      "severity": "error",
+      "message": "0 invalid, 0 empty geometries",
+      "details": {
+        "invalid": 0,
+        "empty": 0
+      }
+    },
+    {
+      "check": "delivery: >= 5 scored segments",
+      "passed": true,
+      "severity": "error",
+      "message": "33 segments scored",
+      "details": {
+        "count": 33
+      }
+    },
+    {
+      "check": "delivery: risk scores within [0, 1]",
+      "passed": true,
+      "severity": "error",
+      "message": "score range [0.033, 0.818]",
+      "details": {
+        "min": 0.0325,
+        "max": 0.8175
+      }
+    },
+    {
+      "check": "delivery: no-data segments <= 20%",
+      "passed": true,
+      "severity": "warning",
+      "message": "0 segment(s) (0%) had no valid pixels",
+      "details": {
+        "no_data_segments": 0
+      }
+    },
+    {
+      "check": "delivery: risk class distribution",
+      "passed": true,
+      "severity": "info",
+      "message": "high=4, low=28, medium=1",
+      "details": {
+        "low": 28,
+        "high": 4,
+        "medium": 1
+      }
+    }
+  ]
+}
