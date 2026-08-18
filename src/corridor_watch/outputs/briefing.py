@@ -16,10 +16,10 @@ from pathlib import Path
 import geopandas as gpd
 
 STATUS = {
-    "high": ("#d03b3b", "⛔", "High risk"),
-    "medium": ("#ec835a", "⚠️", "Medium risk"),
-    "low": ("#0ca30c", "✅", "Low risk"),
-    "no-data": ("#8a8984", "◌", "No data"),
+    "high": ("#d03b3b", "●", "High risk"),
+    "medium": ("#ec835a", "●", "Medium risk"),
+    "low": ("#0ca30c", "●", "Low risk"),
+    "no-data": ("#8a8984", "○", "No data"),
 }
 
 ACTION = {
@@ -110,7 +110,7 @@ def write_briefing(
         f"<tr><td><b>#{int(r['rank'])}</b></td>"
         f"<td>km {r['km_start']} – {r['km_end']}</td>"
         f"<td><span class='chip' style='--c:{STATUS[r['risk_class']][0]}'>"
-        f"{STATUS[r['risk_class']][1]} {STATUS[r['risk_class']][2]}</span></td>"
+        f"<span class='dot'>{STATUS[r['risk_class']][1]}</span> {STATUS[r['risk_class']][2]}</span></td>"
         f"<td>{html.escape(_reason(r))}</td>"
         f"<td>{ACTION[r['risk_class']]}</td></tr>"
         for _, r in top.iterrows()
@@ -134,58 +134,66 @@ def write_briefing(
 <title>Vegetation risk briefing — {html.escape(aoi_name)}</title>
 <style>
   :root {{
-    color-scheme: light;
-    --surface: #fcfcfb; --card: #ffffff; --line: #e4e3df;
-    --ink: #0b0b0b; --ink-2: #52514e; --ink-3: #8a8984;
-    --accent: #2a78d6;
-  }}
-  @media (prefers-color-scheme: dark) {{
-    :root {{ color-scheme: dark; --surface:#1a1a19; --card:#232322; --line:#3a3936;
-            --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8a8984; --accent:#3987e5; }}
+    color-scheme: only light;
+    --surface: #ffffff; --card: #ffffff; --panel: #f5f6f8; --line: #dfe3e8;
+    --ink: #051c2c; --ink-2: #3c4a57; --ink-3: #75808b;
+    --deep: #051c2c; --electric: #2251ff;
+    --serif: "Bower", Georgia, "Times New Roman", serif;
+    --sans: "McKinsey Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }}
   * {{ box-sizing: border-box; }}
-  body {{ margin:0; background:var(--surface); color:var(--ink);
-         font:16px/1.6 -apple-system, "Segoe UI", Roboto, sans-serif; }}
-  .wrap {{ max-width: 920px; margin: 0 auto; padding: 40px 24px 64px; }}
-  h1 {{ font-size: 30px; line-height:1.2; margin: 0 0 4px; }}
-  h2 {{ font-size: 20px; margin: 40px 0 8px; }}
-  p  {{ color: var(--ink-2); margin: 8px 0; }}
-  .sub {{ color: var(--ink-3); font-size: 14px; }}
+  html, body {{ margin:0; background:var(--surface); }}
+  body {{ color:var(--ink); font:15.5px/1.7 var(--sans); }}
+  .topbar {{ height:5px; background:var(--deep); }}
+  .wrap {{ max-width: 880px; margin: 0 auto; padding: 56px 28px 72px; }}
+  h1 {{ font-family:var(--serif); font-size: 40px; line-height:1.15;
+        margin: 0 0 14px; color:var(--deep); font-weight:500;
+        letter-spacing:-0.005em; }}
+  h2 {{ font-family:var(--serif); font-size: 24px; margin: 56px 0 12px;
+        color:var(--deep); font-weight:500; line-height:1.3; }}
+  h2::before {{ content:""; display:block; width:48px; height:3px;
+                background:var(--electric); margin-bottom:14px; }}
+  p  {{ color: var(--ink-2); margin: 9px 0; }}
+  b  {{ color: var(--ink); }}
+  .sub {{ color: var(--ink-3); font-size: 13.5px; }}
+  .kicker {{ color: var(--electric); font-size:12px; font-weight:600;
+             text-transform:uppercase; letter-spacing:0.14em; margin-bottom:18px; }}
   .tiles {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-            gap:12px; margin:24px 0; }}
-  .tile {{ background:var(--card); border:1px solid var(--line); border-radius:12px;
-           padding:16px 18px; }}
-  .tile .n {{ font-size:30px; font-weight:700; line-height:1.1; }}
-  .tile .l {{ font-size:13px; color:var(--ink-2); margin-top:4px; }}
-  .chip {{ display:inline-block; padding:2px 10px; border-radius:999px;
-           border:1.5px solid var(--c); color:var(--ink); font-size:13px;
-           white-space:nowrap; }}
+            gap:0; margin:32px 0; border-top:1px solid var(--line); }}
+  .tile {{ padding:20px 18px 6px 0; margin-right:24px;
+           border-top:3px solid var(--electric); margin-top:-1px; }}
+  .tile .n {{ font-family:var(--serif); font-size:36px; font-weight:500;
+              line-height:1.05; color:var(--deep); }}
+  .tile .l {{ font-size:12.5px; color:var(--ink-2); margin-top:7px; }}
+  .chip {{ display:inline-block; padding:1px 10px; border:1px solid var(--c);
+           color:var(--ink); font-size:12.5px; white-space:nowrap; background:#fff; }}
+  .chip .dot {{ color:var(--c); }}
   table {{ width:100%; border-collapse:collapse; background:var(--card);
-           border:1px solid var(--line); border-radius:12px; overflow:hidden;
-           font-size:14px; }}
-  th, td {{ text-align:left; padding:10px 12px; border-top:1px solid var(--line);
+           font-size:13.5px; border-top:2px solid var(--deep); }}
+  th, td {{ text-align:left; padding:12px 14px 12px 0; border-bottom:1px solid var(--line);
             vertical-align:top; }}
-  thead th {{ border-top:none; color:var(--ink-2); font-weight:600;
-              background:color-mix(in srgb, var(--card) 60%, var(--surface)); }}
+  thead th {{ color:var(--ink-3); font-weight:600; font-size:11.5px;
+              text-transform:uppercase; letter-spacing:0.08em; }}
   svg {{ width:100%; height:auto; display:block; background:var(--card);
-        border:1px solid var(--line); border-radius:12px; padding:8px; }}
+        border:1px solid var(--line); padding:8px; }}
   .grid {{ stroke: var(--line); stroke-width:1; }}
-  .tick, .lbl {{ font:12px sans-serif; fill: var(--ink-3); }}
+  .tick, .lbl {{ font:12px Helvetica, Arial, sans-serif; fill: var(--ink-3); }}
   .lbl {{ font-weight:700; fill: var(--ink); }}
   .bar:hover {{ opacity:.75; }}
-  .map {{ width:100%; height:480px; border:1px solid var(--line); border-radius:12px; }}
-  .note {{ background:var(--card); border-left:4px solid var(--accent);
-           border-radius:0 10px 10px 0; padding:12px 16px; }}
-  footer {{ margin-top:48px; color:var(--ink-3); font-size:13px;
-            border-top:1px solid var(--line); padding-top:16px; }}
-</style></head><body><div class="wrap">
+  .map {{ width:100%; height:480px; border:1px solid var(--line); background:#fff; }}
+  .note {{ background:var(--panel); border-left:3px solid var(--electric);
+           padding:15px 19px; }}
+  .note b {{ color:var(--deep); }}
+  footer {{ margin-top:64px; color:var(--ink-3); font-size:12.5px;
+            border-top:1px solid var(--line); padding-top:18px; line-height:1.7; }}
+</style></head><body><div class="topbar"></div><div class="wrap">
 
-<p class="sub">Corridor Watch · delivery briefing · {stamp}</p>
+<p class="kicker">Corridor Watch — Vegetation Management Briefing · {stamp}</p>
 <h1>Is vegetation threatening this power line?</h1>
 <p class="sub">Corridor: {html.escape(aoi_name)} · comparing summer
 {html.escape(baseline_range[0][:4])} with summer {html.escape(monitor_range[0][:4])} ·
 quality verdict: <span class="chip" style="--c:{'#0ca30c' if verdict_ok else '#d03b3b'}">
-{'✅' if verdict_ok else '⛔'} {html.escape(verdict)}</span></p>
+<span class="dot">●</span> {html.escape(verdict)}</span></p>
 
 <h2>Why anyone should care</h2>
 <p>Trees and power lines are a bad combination. A branch touching a high-voltage
