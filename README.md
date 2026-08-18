@@ -45,6 +45,14 @@ Everything that affects the result — date ranges, cloud thresholds, buffer wid
 
 The interactive map shows each span colored by risk class with a popup explaining *why* it ranks where it does — every score decomposes into its drivers, because a maintenance planner needs a reason, not a number.
 
+## How it works — in pictures
+
+| | |
+|---|---|
+| ![step 1](docs/how-it-works/step1_inputs.png) | ![step 2](docs/how-it-works/step2_ndvi.png) |
+| ![step 3](docs/how-it-works/step3_change.png) | ![step 4](docs/how-it-works/step4_spans.png) |
+| ![step 5](docs/how-it-works/step5_scoring.png) | ![step 6](docs/how-it-works/step6_deliver.png) |
+
 ## Design decisions
 
 **QA is a first-class pipeline stage, not logging.** A wrong delivery that reaches a customer is far more expensive than a delivery blocked at the gate. Every check returns a structured `CheckResult` with a severity contract (`error` blocks, `warning` flags, `info` traces), rendered into a report that a non-technical PM can read. Checks target real failure modes: a constant raster usually means a broken upstream read; NDVI outside [-1, 1] usually means unscaled digital numbers.
