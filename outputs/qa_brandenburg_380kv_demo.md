@@ -1,6 +1,6 @@
 # QA report — brandenburg_380kv_demo
 
-Generated: 2026-08-18 10:53 UTC  
+Generated: 2026-08-18 11:03 UTC  
 **Verdict: PASS**  
 Checks: 25 total · 0 blocking failure(s) · 0 warning(s)
 
