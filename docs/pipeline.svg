@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="180" viewBox="0 0 980 180" font-family="Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <style>
+    .box{rx:10;stroke-width:1.5;}
+    .t{font-size:14px;font-weight:bold;fill:#0f172a;}
+    .s{font-size:11px;fill:#475569;}
+  </style>
+
+  <rect class="box" x="20" y="45" width="170" height="90" fill="#e0f2fe" stroke="#0284c7" rx="10"/>
+  <text class="t" x="105" y="75" text-anchor="middle">FETCH</text>
+  <text class="s" x="105" y="95" text-anchor="middle">Sentinel-2 L2A (STAC/COG)</text>
+  <text class="s" x="105" y="110" text-anchor="middle">OSM power lines (Overpass)</text>
+
+  <line x1="190" y1="90" x2="225" y2="90" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect class="box" x="228" y="45" width="170" height="90" fill="#dcfce7" stroke="#16a34a" rx="10"/>
+  <text class="t" x="313" y="75" text-anchor="middle">ANALYZE</text>
+  <text class="s" x="313" y="95" text-anchor="middle">NDVI + dNDVI change</text>
+  <text class="s" x="313" y="110" text-anchor="middle">250 m spans · 35 m buffer</text>
+
+  <line x1="398" y1="90" x2="433" y2="90" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect class="box" x="436" y="45" width="170" height="90" fill="#fef9c3" stroke="#ca8a04" rx="10"/>
+  <text class="t" x="521" y="75" text-anchor="middle">QA GATE</text>
+  <text class="s" x="521" y="95" text-anchor="middle">25 structured checks</text>
+  <text class="s" x="521" y="110" text-anchor="middle">error blocks · warning flags</text>
+
+  <line x1="606" y1="90" x2="641" y2="90" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect class="box" x="644" y="45" width="150" height="90" fill="#fce7f3" stroke="#db2777" rx="10"/>
+  <text class="t" x="719" y="75" text-anchor="middle">SCORE</text>
+  <text class="s" x="719" y="95" text-anchor="middle">3 transparent drivers</text>
+  <text class="s" x="719" y="110" text-anchor="middle">risk-ranked spans</text>
+
+  <line x1="794" y1="90" x2="829" y2="90" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect class="box" x="832" y="45" width="130" height="90" fill="#ede9fe" stroke="#7c3aed" rx="10"/>
+  <text class="t" x="897" y="75" text-anchor="middle">DELIVER</text>
+  <text class="s" x="897" y="95" text-anchor="middle">GeoJSON · CSV</text>
+  <text class="s" x="897" y="110" text-anchor="middle">map · QA report</text>
+
+  <text class="s" x="521" y="25" text-anchor="middle" font-size="13" fill="#334155">Corridor Watch — vegetation encroachment monitoring pipeline (Prefect-orchestrated, config-driven)</text>
+  <text class="s" x="521" y="160" text-anchor="middle" fill="#94a3b8">QA gate failure ⇒ delivery blocked, report emitted — bad data never reaches the customer</text>
+</svg>
