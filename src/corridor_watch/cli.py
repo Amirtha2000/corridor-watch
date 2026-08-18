@@ -126,7 +126,10 @@ def cmd_run(cfg: Config, override_qa: bool = False) -> int:
 
     from corridor_watch.outputs import mapping
 
-    map_path = mapping.write_map(scored, lines.to_crs(cfg.crs_utm), out_dir / "corridor_risk_map.html")
+    map_path = mapping.write_map(
+        scored, lines.to_crs(cfg.crs_utm), out_dir / "corridor_risk_map.html",
+        ndvi_path=ndvi_paths["monitor"], dndvi_path=dndvi_path,
+    )
 
     from corridor_watch.outputs import briefing
 
