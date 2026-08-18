@@ -1,0 +1,46 @@
+# Corridor Watch — run configuration
+# AOI: section of a 380 kV transmission corridor south-east of Berlin (Brandenburg)
+
+aoi:
+  name: brandenburg_380kv_demo
+  # WGS84 bounding box [min_lon, min_lat, max_lon, max_lat]
+  bbox: [13.90, 52.20, 14.02, 52.26]
+  crs_utm: "EPSG:32633"   # UTM zone 33N — native Sentinel-2 grid for this AOI
+
+imagery:
+  collection: sentinel-2-l2a
+  stac_api: https://earth-search.aws.element84.com/v1
+  baseline_date_range: ["2025-07-01", "2025-08-31"]
+  monitor_date_range: ["2026-07-01", "2026-08-15"]
+  max_cloud_cover: 20        # % scene-level filter at STAC query time
+  bands: { red: red, nir: nir08, scl: scl }
+
+infrastructure:
+  overpass_api: https://overpass-api.de/api/interpreter
+  power_filter: 'way["power"="line"]'   # transmission lines only
+  min_voltage_kv: 110
+
+analysis:
+  corridor_buffer_m: 35      # regulatory clearance corridor half-width
+  segment_length_m: 250      # analysis span length along the line
+  ndvi_veg_threshold: 0.55   # pixels above this count as woody/dense vegetation
+  growth_dndvi_threshold: 0.12
+
+risk:
+  weights:
+    veg_fraction: 0.4        # share of corridor pixels with dense vegetation
+    ndvi_p90: 0.25           # 90th-percentile NDVI in corridor (canopy proximity proxy)
+    growth_fraction: 0.35    # share of pixels with significant NDVI increase
+  thresholds: { high: 0.60, medium: 0.35 }
+
+qa:
+  max_nodata_fraction: 0.10
+  max_cloud_fraction: 0.15   # from SCL within AOI, after scene-level filter
+  ndvi_valid_range: [-1.0, 1.0]
+  min_segments: 5
+  fail_on: [error]           # abort pipeline on any check with severity 'error'
+
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  outputs_dir: outputs
