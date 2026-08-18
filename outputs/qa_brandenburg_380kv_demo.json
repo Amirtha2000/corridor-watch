@@ -1,6 +1,6 @@
 {
   "run": "brandenburg_380kv_demo",
-  "generated": "2026-08-18 11:21 UTC",
+  "generated": "2026-08-18 13:41 UTC",
   "verdict": "PASS",
   "context": {
     "config": "corridor_brandenburg.yaml",
