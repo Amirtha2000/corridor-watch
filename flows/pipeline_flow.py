@@ -31,8 +31,8 @@ except ImportError:  # graceful degradation: run as plain functions
         return wrap if not args or not callable(args[0]) else args[0]
 
 
-from corridor_watch.config import load_config
 from corridor_watch import cli
+from corridor_watch.config import load_config
 
 
 @task(retries=3, retry_delay_seconds=60)

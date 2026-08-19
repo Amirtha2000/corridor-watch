@@ -18,9 +18,9 @@ import geopandas as gpd
 import numpy as np
 import rasterio
 
+from corridor_watch import qa
 from corridor_watch.analysis import corridor, indices, risk
 from corridor_watch.config import Config, load_config
-from corridor_watch import qa
 
 log = logging.getLogger("corridor_watch")
 
